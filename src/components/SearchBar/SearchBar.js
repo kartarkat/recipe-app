@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import styles from './SearchBar.module.scss'
 
-function SearchBar() {
+function SearchBar({setSearchQuery}) {
     const [searchText, setSearchText] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(searchText)
         setSearchText("")
+        setSearchQuery(searchText)
       // do some action on button click
     }
 
