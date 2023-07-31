@@ -10,6 +10,22 @@
         font-weight: bold;
         margin-bottom: 6px;
     }
+
+    .rightSection {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+
+        .close {
+            border: none;
+            background: none;
+            color: white;
+            background: red;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+    }
 }
 
 @media (min-width: 760px) {

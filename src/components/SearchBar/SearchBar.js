@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './SearchBar.module.scss'
 
-function SearchBar({setSearchQuery}) {
+function SearchBar({ setSearchQuery }) {
     const [searchText, setSearchText] = useState("")
 
     const handleSubmit = (e) => {
@@ -9,7 +9,6 @@ function SearchBar({setSearchQuery}) {
         console.log(searchText)
         setSearchText("")
         setSearchQuery(searchText)
-      // do some action on button click
     }
 
     return (
@@ -22,6 +21,8 @@ function SearchBar({setSearchQuery}) {
                     onChange={e => setSearchText(e.target.value)}
                 />
                 <button type='submit'>Search</button>
+                <button className={styles.close}
+                    onClick={() => setSearchQuery('')}>X</button>
             </form>
         </div>
     )

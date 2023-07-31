@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './RecipeList.module.scss'
 import { Link } from 'react-router-dom'
 import cx from 'classnames'
 
 function RecipeList({ recipes = [] }) {
 
+    const [filteredData, setFilteredData] = useState(recipes)
+
+    useEffect(() => {
+        setFilteredData(recipes)
+    }, [recipes])
+
     const checkForRecipes = () => {
-        if (recipes.length === 0)
+        if (filteredData.length === 0)
             return <div className={styles.noRecipes}>No recipes Found, search for different item</div>
         else
           return renderList()
@@ -14,7 +20,7 @@ function RecipeList({ recipes = [] }) {
 
     const renderList = () => {
         return <div className={styles.list}>
-            {recipes.map(recipe => (
+            {filteredData.map(recipe => (
                 <Link
                     to={`/recipe/${recipe.id}`}
                     className={styles.linkItem}
@@ -39,9 +45,39 @@ function RecipeList({ recipes = [] }) {
         </div>
     }
 
+    const handleFilter = (event) => {
+        const value  = event.target.value;
+        if(value === ''){
+            setFilteredData(recipes)
+        }else{
+            const filtered = recipes.filter((recipe) => {
+                if(value === 'veg'){
+                    return recipe.isVeg;
+                } else if (value === 'non-veg'){
+                    return !recipe.isVeg;
+                }else {
+                    return recipe.level === value
+                }
+            });
+            setFilteredData(filtered)
+        }
+
+    }
+
     return (
         <div className={styles.recipeList}>
+            <div className={styles.header}>
             <h3 className={styles.title}>Check out these recipes</h3>
+            <select onChange={handleFilter} name="filter" id="filter">
+                <option value="">All</option>
+                <option value="veg">Veg</option>
+                <option value="non-veg">Non Veg</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            </div>
             {checkForRecipes()}
         </div>
     )

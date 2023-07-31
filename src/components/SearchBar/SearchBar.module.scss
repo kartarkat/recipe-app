@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    gap: 15px;
 
     form {
         display: flex;
@@ -24,6 +25,17 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    .close {
+        border: none;
+        background: none;
+        color: white;
+        background: red;
+        padding: 10px 15px;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-left: 20px;
     }
 
 }
